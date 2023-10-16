@@ -12,13 +12,13 @@ export class Vehiiculo {
     constructor (
 
         public id : number ,
+        public piso_id : number,
+        public tarifa_id : number,
         public placa : string ,
-        public tipoVehiiculo : TipoVehiiculo ,
         public tiempoLlegada : string ,
         public tiempoSalida : string ,
-        public tarifa : Tarifa ,
-        public piso : Piso
-    
+        public tipo_vehiculo : string ,
+
     ) { }
 
 

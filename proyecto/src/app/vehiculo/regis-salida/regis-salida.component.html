@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" name="robots" http-equiv="cache-control" content="no-store">
+        <title>Aplicación AdminParking</title>
+    </head>
+    <body>
+        <div class="barra">
+            <i>Registrar Salida</i>
+            <a class="botones_barra" href="http://localhost:8080/tarifas/anadirTarifa">Anadir Tarifa</a> 
+            <a class="botones_barra" href="http://localhost:8080/pisos/anadirPiso">Anadir Piso</a> 
+            <a class="botones_barra" href="http://localhost:8080/admin/tarifas-espacios">Anadir Piso</a> 
+            <a class="botones_barra" [routerLink]="['/vehiculo/anadirVehiculo']">Registrar Vehiculo</a> <!--Para que me envie a otro componente-->
+        </div>
+
+    <h3>Registrar salida</h3>
+       
+        <form method = "post" action = "/vehiculos/crearVehiculo">
+            <div>
+                <label for="placa">Número de Placa:</label>
+                <br>
+                <input type="text" id="placa" name="placa" placeholder="Escribe la placa del vehículo.">
+            </div>
+ 
+            <div>
+                <label for="TiempoSalida">Hora de salida</label>
+                <br>
+                <input type="time" id="TiempoSalida" name="TiempoSalida">
+            </div>
+
+            <br>
+            <div>
+                <input type="submit" value="Registrar salida">
+            </div>
+        </form>
+   
+        <div id="aviso"></div>
+ 
+    </body>
+
+
+</html>

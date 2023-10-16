@@ -1,0 +1,131 @@
+/* Estilos generales del cuerpo del documento */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra horizontalmente */
+    justify-content: center; /* Centra verticalmente */
+    height: 100vh; /* Establece la altura del cuerpo para centrar verticalmente */
+    margin: 0;
+}
+
+/* Encabezados */
+h3 {
+    color: #333;
+    margin-top: 20px; /* Reducido el espacio superior */
+    margin-bottom: 20px; /* Reducido el espacio inferior */
+    text-align: center;
+}
+
+/* Estilos para el formulario */
+form {
+    text-align: center;
+    max-width: 400px; /* Ancho máximo del formulario */
+    width: 100%;
+}
+
+/* Estilos para los elementos dentro del formulario */
+label, select, input[type="text"], input[type="number"], input[type="submit"] {
+    display: block;
+    margin: 10px auto; /* Centra horizontalmente con espaciado */
+    text-align: center; /* Centra el texto dentro de los elementos */
+    width: 80%; /* Ancho del 80% para mantenerlo contenido en el formulario */
+}
+
+/* Estilos para los mensajes de éxito y error */
+#mensajeExito, #mensajeError {
+    text-align: center;
+}
+
+/* Estilos para la barra de navegación */
+.barra {
+    font-size: 20px;
+    text-align: center;
+    justify-content: space-between;
+    display: flex;
+    padding: 20px 120px; /* Reducido el relleno para hacerlo más estilizado */
+    height: auto; /* Altura automática basada en el contenido */
+    background-color: white;
+    color: black; /* Color de letra en negro */
+    font-weight: bold; /* Letra en negrilla */
+    border: 4px solid black; /* Borde sólido de 4px en negro */
+    border-radius: 8px; /* Bordes redondeados */
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 2;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+/* Estilos generales del cuerpo del documento */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra horizontalmente */
+    justify-content: center; /* Centra verticalmente */
+    height: 100vh; /* Establece la altura del cuerpo para centrar verticalmente */
+    margin: 0;
+}
+
+/* Encabezados */
+h3 {
+    color: #333;
+    margin-top: 20px; /* Reducido el espacio superior */
+    margin-bottom: 20px; /* Reducido el espacio inferior */
+    text-align: center;
+}
+
+/* Estilos para el formulario */
+form {
+    text-align: center;
+    max-width: 400px; /* Ancho máximo del formulario */
+    width: 100%;
+}
+
+/* Estilos para los elementos dentro del formulario */
+label, select, input[type="text"], input[type="number"], input[type="submit"] {
+    display: block;
+    margin: 10px auto; /* Centra horizontalmente con espaciado */
+    text-align: center; /* Centra el texto dentro de los elementos */
+    width: 80%; /* Ancho del 80% para mantenerlo contenido en el formulario */
+}
+
+/* Estilos para los mensajes de éxito y error */
+#mensajeExito, #mensajeError {
+    text-align: center;
+}
+
+/* Estilos para la barra de navegación */
+.barra {
+    font-size: 20px;
+    text-align: center;
+    justify-content: space-between;
+    display: flex;
+    padding: 20px 120px;
+    height: auto;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    border: 4px solid black;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.botones_barra {
+    /* Letra */
+    color: black;
+    font-size: 18px;
+    text-align: center;
+    text-decoration: none;
+    /* Fondo */
+    background-color: darkgrey;
+    /* Borde */
+    border: 4px solid black;
+    border-radius: 8px;
+    /* Botón */
+    height: 28px;
+    width: 200px;
+}

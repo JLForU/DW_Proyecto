@@ -10,8 +10,8 @@ export class Tarifa {
     constructor (
 
         public id : number ,
-        public tipoVehiiculo : TipoVehiiculo ,
-        public tarifa : number
+        public tipoVehiculo : string ,
+        public tarifaPorMinuto : string
 
     ) { }
 
