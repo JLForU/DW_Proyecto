@@ -14,6 +14,8 @@ export class TarifaService {
     return this.http.get<Tarifa[]>("http://localhost:8080/tarifasRest/getTarifas");
   }
 
-  
+  getTarifaById (id : number): Observable<Tarifa>{
+    return this.http.get<Tarifa>(`http://localhost:8080/tarifasRest/${id}`);
+  }
 
 }

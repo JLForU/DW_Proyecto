@@ -21,15 +21,33 @@
         <div>
           <label for="tipoVehiculo">Tipo de Vehículo:</label>
           <br>
-          <select id="tipoVehiculo" name="tipoVehiculo" [(ngModel)]="vehiculo.tipoVehiculo" required (ngModelChange)="verificarFormulario()">
+          <!-- <select id="tipoVehiculo" name="tipoVehiculo" [(ngModel)]="vehiculo.tipoVehiculo" required (ngModelChange)="verificarFormulario()">
+
             <option value="Carro">Carro</option>
             <option value="Moto">Moto</option>
-          </select>
+          </select> -->
+          <input type="text" id="tipoVehiculo" name="tipoVehiculo" [(ngModel)]="vehiculo.tipoVehiculo" required (ngModelChange)="verificarFormulario()">
+
         </div>
 
         <div *ngIf="vehiculo.tipoVehiculo">
+          <h4>Capacidad disponible por piso para {{ vehiculo.tipoVehiculo }}:</h4>
+          <ul>
+            <li *ngFor="let piso of getPisosPorTipoVehiculo(vehiculo.tipoVehiculo)">
+              ID del piso: {{ piso.id }} - Parqueaderos Disponibles: {{ piso.capacidad }} para {{ vehiculo.tipoVehiculo }}
+            </li>
+          </ul>
+        </div>
+        
+        <div *ngIf="vehiculo.tipoVehiculo">
             Tarifa para {{ vehiculo.tipoVehiculo }}: {{ obtenerTarifa(vehiculo.tipoVehiculo) }}
           </div>
+
+        <div>
+          <label for="placa">Indique el ID del piso</label>
+          <br>
+          <input type="text" id="idPiso" name="idPiso" [(ngModel)]="id_piso" placeholder="Escriba el id del piso en donde se quiere parquear" required (ngModelChange)="verificarFormulario()">
+        </div>
 
         <div>
           <label for="placa">Número de Placa:</label>
@@ -46,10 +64,13 @@
           <button type="submit" [disabled]="!formularioValido">Añadir vehiculo</button>
         </div>
       </form>
-      
-      
-      
         <div id="aviso"></div>
+        <div class="error-message" *ngIf="errorMessages.length > 0">
+          <ul>
+            <li *ngFor="let errorMessage of errorMessages">{{ errorMessage }}</li>
+          </ul>
+        </div>
+        
  
     </body>
 

@@ -14,26 +14,25 @@
         </div>
 
     <h3>Registrar salida</h3>
-       
-        <form method = "post" action = "/vehiculos/crearVehiculo">
+        <form #miFormulario="ngForm" (ngSubmit)="onSubmit(miFormulario.value)">
             <div>
                 <label for="placa">Número de Placa:</label>
                 <br>
-                <input type="text" id="placa" name="placa" placeholder="Escribe la placa del vehículo.">
+                <input type="text" id="placa" name="placa" [(ngModel)]="formData.placa" placeholder="Escribe la placa del vehículo.">
             </div>
- 
+        
             <div>
                 <label for="TiempoSalida">Hora de salida</label>
                 <br>
-                <input type="time" id="TiempoSalida" name="TiempoSalida">
+                <input type="time" id="TiempoSalida" name="TiempoSalida" [(ngModel)]="formData.tiempoSalida">
             </div>
-
+        
             <br>
             <div>
-                <input type="submit" value="Registrar salida">
+                <button type="submit">Registrar salida</button>
             </div>
         </form>
-   
+
         <div id="aviso"></div>
  
     </body>
