@@ -7,14 +7,15 @@ body {
     align-items: center; /* Centra horizontalmente */
     justify-content: center; /* Centra verticalmente */
     height: 100vh; /* Establece la altura del cuerpo para centrar verticalmente */
-    margin: 0;
+    margin: 60px 0; /* Agregado un margen superior de 60px para mantener el espacio en la parte superior */
+
 }
 
 /* Encabezados */
 h3 {
     color: #333;
     margin-top: 20px; /* Reducido el espacio superior */
-    margin-bottom: 20px; /* Reducido el espacio inferior */
+    margin-bottom: 40px; /* Reducido el espacio inferior */
     text-align: center;
 }
 
@@ -36,41 +37,6 @@ label, select, input[type="text"], input[type="number"], input[type="submit"] {
 /* Estilos para los mensajes de éxito y error */
 #mensajeExito, #mensajeError {
     text-align: center;
-}
-
-/* Estilos generales del cuerpo del documento */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centra horizontalmente */
-    justify-content: center; /* Centra verticalmente */
-    height: 100vh; /* Establece la altura del cuerpo para centrar verticalmente */
-    margin: 0;
-}
-
-/* Encabezados */
-h3 {
-    color: #333;
-    margin-top: 20px; /* Reducido el espacio superior */
-    margin-bottom: 20px; /* Reducido el espacio inferior */
-    text-align: center;
-}
-
-/* Estilos para el formulario */
-form {
-    text-align: center;
-    max-width: 400px; /* Ancho máximo del formulario */
-    width: 100%;
-}
-
-/* Estilos para los elementos dentro del formulario */
-label, select, input[type="text"], input[type="number"], input[type="submit"] {
-    display: block;
-    margin: 10px auto; /* Centra horizontalmente con espaciado */
-    text-align: center; /* Centra el texto dentro de los elementos */
-    width: 80%; /* Ancho del 80% para mantenerlo contenido en el formulario */
 }
 
 /* Estilos para los mensajes de éxito y error */

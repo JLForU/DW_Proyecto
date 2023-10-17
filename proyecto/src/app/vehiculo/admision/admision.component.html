@@ -5,72 +5,68 @@
         <title>Aplicación AdminParking</title>
     </head>
     <body>
+      <div class="barra">
+        <i>Registrar Vehiculo</i>
+        <a class="botones_barra" [routerLink]="['/vehiculo/registrarSalida']">Registrar Salida</a> <!--Para que me envie a otro componente-->
+        <a class="botones_barra" href="http://localhost:8080/pisos/anadirPiso">Añadir Piso</a>
+        <a class="botones_barra" href="http://localhost:8080/tarifas/anadirTarifa">Añadir Tarifa</a>
+        <a class="botones_barra" href="http://localhost:8080/tiposvehiculo/anadirTipo">Añadir Tipo Vehiculo</a>
+        <a class="botones_barra" href="http://localhost:8080/admin/tarifas-espacios">Tarifas y Espacios</a>
+        <a class="botones_barra" href="iniciar sesioon.html">Cerrar sesión</a>
+      </div>
 
-        <div class="barra">
-            <i>Registrar Vehiculo</i>
-            <a class="botones_barra" [routerLink]="['/vehiculo/registrarSalida']">Registrar Salida</a> <!--Para que me envie a otro componente-->
-            <a class="botones_barra" href="http://localhost:8080/pisos/anadirPiso">Añadir Piso</a>
-            <a class="botones_barra" href="http://localhost:8080/tarifas/anadirTarifa">Añadir Tarifa</a>
-            <a class="botones_barra" href="http://localhost:8080/tiposvehiculo/anadirTipo">Añadir Tipo Vehiculo</a>
-            <a class="botones_barra" href="http://localhost:8080/admin/tarifas-espacios">Tarifas y Espacios</a>
-            <a class="botones_barra" href="iniciar sesioon.html">Cerrar sesión</a>
-        </div>
-
-    <h3>Admitir un vehículo e indicarle el piso en el cual debe parquear</h3>
-       
-    <form (ngSubmit)="onSubmit()">
+      <h3>Admitir un vehículo e indicarle el piso en el cual debe parquear</h3>
+      <form (ngSubmit)="onSubmit()">
         <div>
-          <label for="tipoVehiculo">Tipo de Vehículo:</label>
-          <br>
-          <!-- <select id="tipoVehiculo" name="tipoVehiculo" [(ngModel)]="vehiculo.tipoVehiculo" required (ngModelChange)="verificarFormulario()">
-
-            <option value="Carro">Carro</option>
-            <option value="Moto">Moto</option>
-          </select> -->
-          <input type="text" id="tipoVehiculo" name="tipoVehiculo" [(ngModel)]="vehiculo.tipoVehiculo" required (ngModelChange)="verificarFormulario()">
-
-        </div>
-
-        <div *ngIf="vehiculo.tipoVehiculo">
-          <h4>Capacidad disponible por piso para {{ vehiculo.tipoVehiculo }}:</h4>
-          <ul>
-            <li *ngFor="let piso of getPisosPorTipoVehiculo(vehiculo.tipoVehiculo)">
-              ID del piso: {{ piso.id }} - Parqueaderos Disponibles: {{ piso.capacidad }} para {{ vehiculo.tipoVehiculo }}
-            </li>
-          </ul>
+            <label for="tipoVehiculo">Tipo de Vehículo:</label>
+            <select id="tipoVehiculo" name="tipoVehiculo" [(ngModel)]="vehiculo.tipoVehiculo" required (ngModelChange)="verificarFormulario()">
+                <option value="">Seleccione un tipo de vehículo</option>
+                <option *ngFor="let tipo of tipos" [value]="tipo.tipo">{{ tipo.tipo }}</option>
+            </select>
         </div>
         
+
+        <div *ngIf="vehiculo.tipoVehiculo">
+            <h4>Capacidad disponible por piso para {{ vehiculo.tipoVehiculo }}:</h4>
+            <ul>
+                <li *ngFor="let piso of getPisosPorTipoVehiculo(vehiculo.tipoVehiculo)">
+                    ID del piso: {{ piso.id }} - Parqueaderos Disponibles: {{ piso.capacidad }} para {{ vehiculo.tipoVehiculo }}
+                </li>
+            </ul>
+        </div>
+
         <div *ngIf="vehiculo.tipoVehiculo">
             Tarifa para {{ vehiculo.tipoVehiculo }}: {{ obtenerTarifa(vehiculo.tipoVehiculo) }}
-          </div>
-
-        <div>
-          <label for="placa">Indique el ID del piso</label>
-          <br>
-          <input type="text" id="idPiso" name="idPiso" [(ngModel)]="id_piso" placeholder="Escriba el id del piso en donde se quiere parquear" required (ngModelChange)="verificarFormulario()">
         </div>
 
         <div>
-          <label for="placa">Número de Placa:</label>
-          <br>
-          <input type="text" id="placa" name="placa" [(ngModel)]="vehiculo.placa" placeholder="Escribe la placa del vehículo." required (ngModelChange)="verificarFormulario()">
+            <label for="idPiso" style="display: inline-block; width: 200px;">Indique el piso:</label>
+            <select id="idPiso" name="idPiso" [(ngModel)]="id_piso" required (ngModelChange)="verificarFormulario()">
+                <option value="">Seleccione un piso</option>
+                <option *ngFor="let piso of getPisosPorTipoVehiculo(vehiculo.tipoVehiculo)" [value]="piso.id">
+                    ID del piso: {{ piso.id }} - Espacios disponibles: {{ piso.capacidad }}
+                </option>
+            </select>
         </div>
+
         <div>
-          <label for="TiempoLlegada">Hora de llegada</label>
-          <br>
-          <input type="time" id="TiempoLlegada" name="TiempoLlegada" [(ngModel)]="vehiculo.tiempoLlegada" required (ngModelChange)="verificarFormulario()">
+            <label for="placa" style="display: inline-block; width: 200px;">Número de Placa:</label>
+            <input type="text" id="placa" name="placa" [(ngModel)]="vehiculo.placa" placeholder="Escribe la placa del vehículo." required (ngModelChange)="verificarFormulario()">
         </div>
+
         <br>
         <div>
-          <button type="submit" [disabled]="!formularioValido">Añadir vehiculo</button>
+            <button type="submit" [disabled]="!formularioValido">Añadir vehículo</button>
         </div>
-      </form>
-        <div id="aviso"></div>
-        <div class="error-message" *ngIf="errorMessages.length > 0">
-          <ul>
-            <li *ngFor="let errorMessage of errorMessages">{{ errorMessage }}</li>
-          </ul>
-        </div>
+    </form>
+
+    
+    <div id="aviso"></div>
+    <div class="error-message" *ngIf="errorMessages.length > 0">
+      <ul>
+        <li *ngFor="let errorMessage of errorMessages">{{ errorMessage }}</li>
+      </ul>
+    </div>
         
     </body>
 

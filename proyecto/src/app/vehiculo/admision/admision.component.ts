@@ -43,16 +43,29 @@ export class AdmisionComponent implements OnInit{
       console.log('Arreglo de tipos:', this.tipos);
     });
   }
+
+  obtenerFechaYHoraActual() {
+    const now = new Date();
+    const dia = now.getDate().toString().padStart(2, '0'); // Día en formato de dos dígitos
+    const mes = (now.getMonth() + 1).toString().padStart(2, '0'); // Mes en formato de dos dígitos
+    const año = now.getFullYear();
+    const hora = now.getHours().toString().padStart(2, '0'); // Hora en formato de dos dígitos
+    const minutos = now.getMinutes().toString().padStart(2, '0'); // Minutos en formato de dos dígitos
+  
+    this.vehiculo.tiempoLlegada = `${dia}/${mes}/${año} ${hora}:${minutos}`;
+  }
+
+  
   onSubmit() {
     this.errorMessages = []; // Reinicia la lista de mensajes de error
     // Crear una instancia de Vehiculo
     const vehiculo1 = new Vehiculo(
-      this.vehiculo.tiempoLlegada, 
-      this.vehiculo.tiempoSalida,
       this.vehiculo.placa,
     );
   
     this.obtenerTipo(this.vehiculo.tipoVehiculo);
+    this.obtenerFechaYHoraActual();
+    vehiculo1.tiempoLlegada = this.vehiculo.tiempoLlegada;
     // Obtener el tipo de vehículo usando la función obtenerTipo()
     if (this.tipo_id !== null) {
       this.tipoService.getTipoById(this.tipo_id).subscribe((tipo) => {
@@ -110,7 +123,7 @@ export class AdmisionComponent implements OnInit{
   
   
   verificarFormulario() {
-    this.formularioValido = this.vehiculo.tipoVehiculo && this.vehiculo.placa && this.vehiculo.tiempoLlegada && this.id_piso;
+    this.formularioValido = this.vehiculo.tipoVehiculo && this.vehiculo.placa && this.id_piso;
   }
 
 

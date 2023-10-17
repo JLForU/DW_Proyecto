@@ -68,7 +68,7 @@ export class RegisSalidaComponent {
       (vehiculo) => vehiculo.placa === this.formData.placa
     );
   
-    if (vehiculoEncontrado) {
+    if (vehiculoEncontrado && vehiculoEncontrado.tiempoLlegada) {
       // El vehículo fue encontrado, asigna la hora de llegada
       this.horaLlegada = vehiculoEncontrado.tiempoLlegada;
     } else {
@@ -76,18 +76,46 @@ export class RegisSalidaComponent {
       this.horaLlegada = 'No encontrado';
     }
   }
+  obtenerFechaYHoraActual() {
+    const now = new Date();
+    const dia = now.getDate().toString().padStart(2, '0'); // Día en formato de dos dígitos
+    const mes = (now.getMonth() + 1).toString().padStart(2, '0'); // Mes en formato de dos dígitos
+    const año = now.getFullYear();
+    const hora = now.getHours().toString().padStart(2, '0'); // Hora en formato de dos dígitos
+    const minutos = now.getMinutes().toString().padStart(2, '0'); // Minutos en formato de dos dígitos
   
-
+    this.formData.tiempoSalida = `${dia}/${mes}/${año} ${hora}:${minutos}`;
+  }
+  parsearFecha(fechaStr: string) {
+    const partes = fechaStr.split(" ");
+    if (partes.length === 2) {
+      const fecha = partes[0];
+      const hora = partes[1];
+      const [dia, mes, anio] = fecha.split("/").map(Number);
+      const [horaStr, minutoStr] = hora.split(":").map(Number);
+      return new Date(anio, mes - 1, dia, horaStr, minutoStr);
+    } else {
+      return new Date(fechaStr); // Intenta analizarlo directamente
+    }
+  }
+    
   calcularTarifa() {
-    if (this.vehiculoSeleccionado && this.vehiculoSeleccionado.tiempoLlegada && this.formData.tiempoSalida) {
-      const llegada = new Date(`2000-01-01T${this.vehiculoSeleccionado.tiempoLlegada}`);
-      const salida = new Date(`2000-01-01T${this.formData.tiempoSalida}`);
+    if (this.vehiculoSeleccionado && this.vehiculoSeleccionado.tiempoLlegada) {
+      const llegada = this.parsearFecha(this.vehiculoSeleccionado.tiempoLlegada);
+      this.obtenerFechaYHoraActual(); // Llama a la función para obtener el tiempo de salida actual
+      const salida = this.parsearFecha(this.formData.tiempoSalida);
       const tarifaMinuto = this.obtenerTarifa(this.vehiculoSeleccionado.tipoVehiculo!.tipo);
+      console.log("Llegada1:", llegada);
+      console.log("Salida1:", salida);  
       if (!isNaN(llegada.getTime()) && !isNaN(salida.getTime())) {
+        console.log("Llegada:", llegada);
+        console.log("Salida:", salida);
+        console.log("Tarifa por minuto:", tarifaMinuto);
+  
         const minutosTranscurridos = (salida.getTime() - llegada.getTime()) / 60000; // 1 minuto = 60000 ms
         console.log("Minutos transcurridos: ", minutosTranscurridos);
-        this.cobroFinal = minutosTranscurridos*tarifaMinuto ;
-        console.log("Cobro  final es: " + this.cobroFinal);
+        this.cobroFinal = minutosTranscurridos * tarifaMinuto;
+        console.log("Cobro final es: " + this.cobroFinal.toFixed(2)); // Muestra el cobro final con dos decimales
       } else {
         console.log('La hora de llegada o la hora de salida no son válidas.');
       }
@@ -128,6 +156,15 @@ export class RegisSalidaComponent {
         this.handleRetiroError(error);
       }
     );
+
+    this.pisoService.sacarVehiculoF(vehiculoId).subscribe(
+      (response) => {
+        this.finalizarRetiro();
+      },
+      (error) => {
+        this.handleRetiroError(error);
+      }
+    );
   }
   
   finalizarRetiro() {
@@ -135,13 +172,9 @@ export class RegisSalidaComponent {
     this.vehiculoRetirado = true;
     console.log('Vehículo retirado del piso.');
   }
-  
   handleRetiroError(error: any) {
     console.error('Error al retirar el vehículo del piso.', error);
   }
-  
-  
-  
   getPisoIdPorPlaca(placa: string): number | null {
     for (const piso of this.pisos) {
       if (piso.tipoVehiculo.tipo === this.vehiculoSeleccionado!.tipoVehiculo!.tipo && piso.vehiculos) {
@@ -157,7 +190,6 @@ export class RegisSalidaComponent {
   obtenerTarifa(tipoVehiculo: string): number {
     // Suponiendo que tarifas es una lista de objetos Tarifa
     const tarifaEncontrada = this.tarifas.find((tarifa) => tarifa.tipoVehiculo.tipo === tipoVehiculo);
-    
     if (tarifaEncontrada) {
       this.tarifa_id = tarifaEncontrada.id;
       return Number(tarifaEncontrada.tarifaPorMinuto);      } 
@@ -166,6 +198,4 @@ export class RegisSalidaComponent {
     return 0;
       }
   }
-
-  
 }
