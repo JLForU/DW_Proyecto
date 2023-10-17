@@ -18,20 +18,38 @@
             <div>
                 <label for="placa">Número de Placa:</label>
                 <br>
-                <input type="text" id="placa" name="placa" [(ngModel)]="formData.placa" placeholder="Escribe la placa del vehículo.">
+                <input type="text" id="placa" name="placa" [(ngModel)]="formData.placa" placeholder="Escribe la placa del vehículo."  (blur)="buscarHoraLlegada()">
+            </div>
+
+            <div>
+                <label for="horaLlegada">Hora de llegada:</label>
+                <br>
+                <span id="horaLlegada">{{ horaLlegada }}</span>
             </div>
         
             <div>
-                <label for="TiempoSalida">Hora de salida</label>
+                <label for="TiempoSalida">Hora de salida (formato militar):</label>
                 <br>
-                <input type="time" id="TiempoSalida" name="TiempoSalida" [(ngModel)]="formData.tiempoSalida">
-            </div>
-        
+                <input type="time" id="TiempoSalida" name="TiempoSalida" [(ngModel)]="formData.tiempoSalida" >
+              </div>
+
+              <div>
+                <label for="cobroFinal">Cobro Final:</label>
+                <br>
+                <span id="cobroFinal">{{ cobroFinal | currency:'USD':'symbol' }}</span>
+              </div>
+
             <br>
             <div>
-                <button type="submit">Registrar salida</button>
+                <button type="submit">Mostrar cobro</button>
             </div>
         </form>
+        <br>
+        <div>
+            <button type="button" (click)="retirarVehiculo()">Retirar vehículo</button>
+        </div>
+        <br>
+        <div id="mensajeRetiro" *ngIf="vehiculoRetirado">{{ mensajeRetiro }}</div>
 
         <div id="aviso"></div>
  

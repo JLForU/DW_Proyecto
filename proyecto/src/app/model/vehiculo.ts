@@ -15,7 +15,7 @@ export class Vehiculo {
     tipoVehiculo: string;
     piso: Piso | undefined ; // Ajusta el tipo según tu entidad de Piso
     tarifa: Tarifa | undefined; // Ajusta el tipo según tu entidad de Tarifa
-  vehiculo1: any;
+    vehiculo1: any;
 
     constructor(tiempoLlegada: string, tiempoSalida: string, placa: string, tipoVehiculo: string,) {
         this.tiempoLlegada = tiempoLlegada;
