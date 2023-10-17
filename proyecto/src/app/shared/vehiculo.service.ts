@@ -25,5 +25,4 @@ export class VehiculoService {
   getVehiculosById(id : number): Observable<Vehiculo> {
     return this.http.get<Vehiculo>(`http://localhost:8080/vehiculos/${id}`);
   }
-
 }

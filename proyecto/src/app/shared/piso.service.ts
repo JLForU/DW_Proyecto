@@ -32,6 +32,15 @@ export class PisoService {
         'Content-Type': 'application/json;charset=UTF-8'
       })
     });
+    
+  }
+  sacarVehiculo(id : number){
+    return this.http.post("http://localhost:8080/pisosRest/sacarVehiculoPiso",id,{
+      headers : new HttpHeaders({
+        'Content-Type': 'application/json;charset=UTF-8'
+      })
+    });
+    
   }
 
 }

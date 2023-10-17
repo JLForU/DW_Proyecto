@@ -97,33 +97,54 @@ export class RegisSalidaComponent {
   }
 
   retirarVehiculo() {
-    const pisoId = this.vehiculoSeleccionado?.piso?.id;
-    console.log(pisoId);
-    if (this.vehiculoSeleccionado) {
-      if (pisoId ) {
-        // Llama al método salirVehiculoPiso del servicio PisoService
-        this.pisoService.salirVehiculo(pisoId).subscribe(
-          (response) => {
-            // Realiza cualquier acción adicional después de retirar el vehículo.
-          this.mensajeRetiro = 'Vehículo retirado';
-          this.vehiculoRetirado = true;
-            console.log('Vehículo retirado del piso.');
-          },
-          (error) => {
-            console.error('Error al retirar el vehículo del piso.', error);
-          }
-        );
-      } else {
-        console.error('No se pudo obtener el ID del piso del vehículo.');
-      }
-    } else {
+    if (!this.vehiculoSeleccionado) {
       console.error('No se ha seleccionado un vehículo para retirar.');
+      return;
     }
+  
+    const pisoId = this.vehiculoSeleccionado.piso?.id;
+    const vehiculoId = this.vehiculoSeleccionado.id;
+  
+    if (pisoId === undefined || vehiculoId === undefined) {
+      console.error('No se pudo obtener el ID del piso del vehículo.');
+      return;
+    }
+  
+    // Llama al método salirVehiculoPiso y sacarVehiculo del servicio PisoService
+    this.pisoService.salirVehiculo(pisoId).subscribe(
+      (response) => {
+        this.finalizarRetiro();
+      },
+      (error) => {
+        this.handleRetiroError(error);
+      }
+    );
+  
+    this.pisoService.sacarVehiculo(vehiculoId).subscribe(
+      (response) => {
+        this.finalizarRetiro();
+      },
+      (error) => {
+        this.handleRetiroError(error);
+      }
+    );
   }
+  
+  finalizarRetiro() {
+    this.mensajeRetiro = 'Vehículo retirado';
+    this.vehiculoRetirado = true;
+    console.log('Vehículo retirado del piso.');
+  }
+  
+  handleRetiroError(error: any) {
+    console.error('Error al retirar el vehículo del piso.', error);
+  }
+  
+  
   
   getPisoIdPorPlaca(placa: string): number | null {
     for (const piso of this.pisos) {
-      if (piso.tipoVehiculo === this.vehiculoSeleccionado?.tipoVehiculo && piso.vehiculos) {
+      if (piso.tipoVehiculo.tipo === this.vehiculoSeleccionado?.tipoVehiculo && piso.vehiculos) {
         const vehiculoEnPiso = piso.vehiculos.find((vehiculo) => vehiculo.placa === placa);
         if (vehiculoEnPiso) {
           return piso.id;
@@ -135,7 +156,7 @@ export class RegisSalidaComponent {
   
   obtenerTarifa(tipoVehiculo: string): number {
     // Suponiendo que tarifas es una lista de objetos Tarifa
-    const tarifaEncontrada = this.tarifas.find((tarifa) => tarifa.tipoVehiculo === tipoVehiculo);
+    const tarifaEncontrada = this.tarifas.find((tarifa) => tarifa.tipoVehiculo.tipo === tipoVehiculo);
     
     if (tarifaEncontrada) {
       this.tarifa_id = tarifaEncontrada.id;

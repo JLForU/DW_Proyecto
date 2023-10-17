@@ -1,6 +1,7 @@
 
+import { TipoVehiculo } from './tipo-vehiculo';
 import { Vehiculo } from './vehiculo';
-import { TipoVehiiculo } from './tipo-vehiiculo';
+
 
 /* IMPLEMENTACIÓN DE CLASE "Piso". */
 
@@ -9,7 +10,7 @@ export class Piso {
     constructor (
         public id : number ,
         public area : string ,
-        public tipoVehiculo : string ,
+        public tipoVehiculo : TipoVehiculo ,
         public capacidad : number,
         public vehiculos : Vehiculo[]
     ) { }

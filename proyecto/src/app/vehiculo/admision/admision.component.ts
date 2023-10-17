@@ -49,11 +49,10 @@ export class AdmisionComponent implements OnInit{
     this.pisoService.getPisoById(this.id_piso).subscribe((piso) => {
       if (piso) {
         // Verificar que el tipo de vehículo del piso coincide con el del vehículo
-        if (piso.tipoVehiculo === vehiculo1.tipoVehiculo) {
+        if (piso.tipoVehiculo.tipo === vehiculo1.tipoVehiculo) {
           // Verificar si hay espacios disponibles en el piso
           if (piso.capacidad > 0) {
             console.log('El vehículo se creó S:');
-
             // Obtener la tarifa por el tipo de vehículo
             this.tarifaService.getTarifaById(this.tarifa_id!).subscribe((tarifa) => {
               if (tarifa) {
@@ -61,7 +60,6 @@ export class AdmisionComponent implements OnInit{
                 vehiculo1.piso = piso;
                 // Asignar la tarifa al vehículo
                 vehiculo1.tarifa = tarifa;
-    
                 // Llamar al servicio para actualizar los espacios en el piso
                 this.pisoService.updateEspacios(piso.id).subscribe(() => {
                   // Llamar al servicio para crear el vehículo
@@ -98,7 +96,7 @@ export class AdmisionComponent implements OnInit{
 
   obtenerTarifa(tipoVehiculo: string): number {
     // Suponiendo que tarifas es una lista de objetos Tarifa
-    const tarifaEncontrada = this.tarifas.find((tarifa) => tarifa.tipoVehiculo === tipoVehiculo);
+    const tarifaEncontrada = this.tarifas.find((tarifa) => tarifa.tipoVehiculo.tipo === tipoVehiculo);
     
     if (tarifaEncontrada) {
       this.tarifa_id = tarifaEncontrada.id;
@@ -112,7 +110,7 @@ export class AdmisionComponent implements OnInit{
   getPisosPorTipoVehiculo(tipoVehiculo: string): any[] {
     const pisosEncontrados: any[] = [];
     for (const piso of this.pisos) {
-      if (piso.tipoVehiculo === tipoVehiculo) { 
+      if (piso.tipoVehiculo.tipo === tipoVehiculo) { 
         pisosEncontrados.push({
           id: piso.id,
           capacidad: piso.capacidad,
