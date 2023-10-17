@@ -82,7 +82,7 @@ export class RegisSalidaComponent {
     if (this.vehiculoSeleccionado && this.vehiculoSeleccionado.tiempoLlegada && this.formData.tiempoSalida) {
       const llegada = new Date(`2000-01-01T${this.vehiculoSeleccionado.tiempoLlegada}`);
       const salida = new Date(`2000-01-01T${this.formData.tiempoSalida}`);
-      const tarifaMinuto = this.obtenerTarifa(this.vehiculoSeleccionado.tipoVehiculo);
+      const tarifaMinuto = this.obtenerTarifa(this.vehiculoSeleccionado.tipoVehiculo!.tipo);
       if (!isNaN(llegada.getTime()) && !isNaN(salida.getTime())) {
         const minutosTranscurridos = (salida.getTime() - llegada.getTime()) / 60000; // 1 minuto = 60000 ms
         console.log("Minutos transcurridos: ", minutosTranscurridos);
@@ -144,7 +144,7 @@ export class RegisSalidaComponent {
   
   getPisoIdPorPlaca(placa: string): number | null {
     for (const piso of this.pisos) {
-      if (piso.tipoVehiculo.tipo === this.vehiculoSeleccionado?.tipoVehiculo && piso.vehiculos) {
+      if (piso.tipoVehiculo.tipo === this.vehiculoSeleccionado!.tipoVehiculo!.tipo && piso.vehiculos) {
         const vehiculoEnPiso = piso.vehiculos.find((vehiculo) => vehiculo.placa === placa);
         if (vehiculoEnPiso) {
           return piso.id;
