@@ -156,15 +156,6 @@ export class RegisSalidaComponent {
         this.handleRetiroError(error);
       }
     );
-
-    this.pisoService.sacarVehiculoF(vehiculoId).subscribe(
-      (response) => {
-        this.finalizarRetiro();
-      },
-      (error) => {
-        this.handleRetiroError(error);
-      }
-    );
   }
   
   finalizarRetiro() {

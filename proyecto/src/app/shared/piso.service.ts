@@ -42,16 +42,5 @@ export class PisoService {
     });
     
   }
-  sacarVehiculoF(id : number){
-    console.info("hfhfhfhfh ");
-    return this.http.post("http://localhost:8080/pisosRest/sacarVehiculoPisoF",id,{
-      headers : new HttpHeaders({
-        'Content-Type': 'application/json;charset=UTF-8'
-      })
-    });
-    
-  }
-
-
 
 }
