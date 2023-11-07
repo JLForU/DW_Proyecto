@@ -35,7 +35,7 @@ export class PisoService {
     
   }
   sacarVehiculo(id : number){
-    return this.http.post("http://localhost:8080/pisosRest/sacarVehiculoPiso",id,{
+    return this.http.post("http://localhost:8080/vehiculos/sacarVehiculoPiso",id,{
       headers : new HttpHeaders({
         'Content-Type': 'application/json;charset=UTF-8'
       })
