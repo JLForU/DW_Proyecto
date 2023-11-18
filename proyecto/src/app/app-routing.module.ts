@@ -4,11 +4,12 @@ import { Vehiculo } from './model/vehiculo';
 import { AdmisionComponent } from './vehiculo/admision/admision.component';
 import { RegisSalidaComponent } from './vehiculo/regis-salida/regis-salida.component';
 import { LoginComponent } from './security/login/login.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'vehiculo/anadirVehiculo', component: AdmisionComponent },    
-  { path: 'vehiculo/registrarSalida', component: RegisSalidaComponent },
+  { path: 'vehiculo/anadirVehiculo', component: AdmisionComponent, canActivate: [AuthGuard] },    
+  { path: 'vehiculo/registrarSalida', component: RegisSalidaComponent, canActivate: [AuthGuard] },
   { path: '', pathMatch: 'full', redirectTo: 'login' }
 ];
 

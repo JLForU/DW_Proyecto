@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
       .subscribe({
         next: jwt => {
           console.log(jwt);
-          this.router.navigate(["cuenta"]);
+          this.router.navigate(["vehiculo/anadirVehiculo"]);
         },
         error: err => { console.error("Login failed:", err) }
       });
