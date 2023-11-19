@@ -37,18 +37,42 @@ export class TarifasEspaciosComponent {
     return this.auth.isAuthenticated();
   }
   ngOnInit(): void {
-    // Utiliza forkJoin para combinar las dos solicitudes
-    forkJoin([
-      this.tarifaService.getTarifas(),
-      this.pisoService.getPisos(),
-      this.tipoService.getTipos()
-    ]).subscribe(([tarifas, pisos, tipos]) => {
-      this.tarifas = tarifas;
-      this.pisos = pisos;
-      this.tipos = tipos;
-      console.log('Arreglo de tarifas:', this.tarifas);
-      console.log('Arreglo de pisos:', this.pisos);
-      console.log('Arreglo de tipos:', this.tipos);
-    });
+    // Obtener el token del usuario autenticado desde tu servicio de autenticación
+    const role = this.auth.role(); // Ejemplo: método para obtener el token
+    
+    // Verificar si el token existe y tiene roles (esto puede variar dependiendo de tu implementación)
+    if (role) {
+      const isAdmin = role.includes('ADMIN');
+      const isConductor = role.includes('CONDUCTOR');
+  
+      // Realizar las solicitudes solo si el usuario tiene los roles necesarios
+      if (isAdmin || isConductor) {
+        forkJoin([
+          this.tarifaService.getTarifas(),
+          this.pisoService.getPisos(),
+        ]).subscribe({
+          next: ([tarifas, pisos]) => {
+            this.tarifas = tarifas;
+            this.pisos = pisos;
+            console.log('Arreglo de tarifas:', this.tarifas);
+            console.log('Arreglo de pisos:', this.pisos);
+          },
+          error: err => {
+            if (err.status === 403) {
+              this.router.navigate(['/access-denied']); // Redirige a la página de acceso denegado
+            } else {
+              // Manejo de otros errores
+            }
+          }
+        });
+      } else {
+        this.router.navigate(['/access-denied']); // Redirige a la página de acceso denegado si no tiene los roles adecuados
+      }
+    } else {
+      // Manejar la falta de token o roles
+      this.router.navigate(['/access-denied']);
+    }
   }
+  
+  
 }

@@ -39,20 +39,41 @@ export class AdmisionComponent implements OnInit{
     return this.auth.isAuthenticated();
   }
   ngOnInit(): void {
-    // Utiliza forkJoin para combinar las dos solicitudes
-    forkJoin([
-      this.tarifaService.getTarifas(),
-      this.pisoService.getPisos(),
-      this.tipoService.getTipos()
-    ]).subscribe(([tarifas, pisos, tipos]) => {
-      this.tarifas = tarifas;
-      this.pisos = pisos;
-      this.tipos = tipos;
-      console.log('Arreglo de tarifas:', this.tarifas);
-      console.log('Arreglo de pisos:', this.pisos);
-      console.log('Arreglo de tipos:', this.tipos);
-    });
+    const userRole = this.auth.role(); // Obtener el rol del usuario autenticado
+  
+    if (userRole) {
+      const isAdminOrPortero = userRole === 'ADMIN' || userRole === 'PORTERO';
+  
+      if (isAdminOrPortero) {
+        forkJoin([
+          this.tarifaService.getTarifas(),
+          this.pisoService.getPisos(),
+          this.tipoService.getTipos()
+        ]).subscribe({
+          next: ([tarifas, pisos, tipos]) => {
+            this.tarifas = tarifas;
+            this.pisos = pisos;
+            this.tipos = tipos;
+            console.log('Arreglo de tarifas:', this.tarifas);
+            console.log('Arreglo de pisos:', this.pisos);
+            console.log('Arreglo de tipos:', this.tipos);
+          },
+          error: err => {
+            if (err.status === 403) {
+              this.router.navigate(['/access-denied']); // Redirige a la página de acceso denegado
+            } else {
+              // Manejo de otros errores
+            }
+          }
+        });
+      } else {
+        this.router.navigate(['/access-denied']); // Redirige a la página de acceso denegado si no tiene los roles adecuados
+      }
+    } else {
+      this.router.navigate(['/access-denied']); // Manejar la falta de token o roles
+    }
   }
+  
 
   obtenerFechaYHoraActual() {
     const now = new Date();

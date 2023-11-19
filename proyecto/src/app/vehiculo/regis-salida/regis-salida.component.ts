@@ -58,20 +58,39 @@ export class RegisSalidaComponent {
   }
 
   ngOnInit(): void {
-    // Utiliza forkJoin para combinar las dos solicitudes
-    forkJoin([
-      this.tarifaService.getTarifas(),
-      this.pisoService.getPisos(),
-      this.vehiculoIns.getVehiculos()
-    ]).subscribe(([tarifas, pisos,vehiculos]) => {
-      this.tarifas = tarifas;
-      this.pisos = pisos;
-      this.vehiculos = vehiculos;
-      console.log('Arreglo de vehiculos: ' , this.vehiculos);
-      console.log('Arreglo de tarifas:', this.tarifas);
-      console.log('Arreglo de pisos:', this.pisos);
-    });
+    const userRole = this.auth.role(); // Obtener el rol del usuario autenticado
+  
+    if (userRole) {
+      const isAdminOrPortero = userRole === 'ADMIN' || userRole === 'PORTERO';
+  
+      if (isAdminOrPortero) {
+        forkJoin([
+          this.tarifaService.getTarifas(),
+          this.pisoService.getPisos(),
+          this.vehiculoIns.getVehiculos()
+        ]).subscribe({
+          next: ([tarifas, pisos, vehiculos]) => {
+            this.tarifas = tarifas;
+            this.pisos = pisos;
+            this.vehiculos = vehiculos;
+            console.log('Arreglo de vehiculos:', this.vehiculos);
+            console.log('Arreglo de tarifas:', this.tarifas);
+            console.log('Arreglo de pisos:', this.pisos);
+          },
+          error: err => {
+            if (err.status === 403) {
+              this.router.navigate(['/access-denied']); // Redirige a la página de acceso denegado
+            }
+          }
+        });
+      } else {
+        this.router.navigate(['/access-denied']); // Redirige a la página de acceso denegado si no tiene los roles adecuados
+      }
+    } else {
+      this.router.navigate(['/access-denied']); // Manejar la falta de token o roles
+    }
   }
+  
 
   buscarHoraLlegada() {
     // Busca un vehículo en la lista de vehículos basado en la placa
@@ -83,7 +102,6 @@ export class RegisSalidaComponent {
       // El vehículo fue encontrado, asigna la hora de llegada
       this.horaLlegada = vehiculoEncontrado.tiempoLlegada;
     } else {
-      // El vehículo no fue encontrado, muestra un mensaje de error o reinicia el campo de hora de llegada
       this.horaLlegada = 'No encontrado';
     }
   }
