@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" name="robots" http-equiv="cache-control" content="no-store">
+    <title>Aplicación AdminParking</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/styleTarifasEspacios.css}">
+
+</head>
+
+<body>
+    <div class="barra">
+        <i>Tarifas y Espacios</i>
+        <a class="botones_barra" [routerLink]="['/vehiculo/registrarSalida']">Registrar Salida</a> <!--Para que me envie a otro componente-->
+        <a class="botones_barra" href="http://localhost:8080/pisos/anadirPiso">Añadir Piso</a>
+        <a class="botones_barra" href="http://localhost:8080/tarifas/anadirTarifa">Añadir Tarifa</a>
+        <a class="botones_barra" href="http://localhost:8080/tiposvehiculo/anadirTipo">Añadir Tipo Vehiculo</a>
+        <a class="botones_barra" *ngIf="showLogoutButton()" (click)="logout()">Logout</a>
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <h3>Mostrar las tarifas por tipo de vehículo</h3>
+
+    <div id="tarifas">
+        <h4>Tarifas por tipo de vehículo:</h4>
+        <ul>
+            <li *ngFor="let tarifa of tarifas" class="tarifas">
+                {{ tarifa.tipoVehiculo.tipo }}: ${{ tarifa.tarifaPorMinuto }} por minuto
+            </li>
+        </ul>
+    </div>
+    
+
+    <h3>Mostrar los espacios disponibles por tipo de vehículo</h3>
+
+    <div id="espacios">
+        <h4>Espacios disponibles por tipo de vehículo:</h4>
+        <ul>
+            <li *ngFor="let infoPiso of pisos" class="pisos">
+                {{ infoPiso.tipoVehiculo.tipo }}: {{ infoPiso.capacidad  }} espacios disponibles
+            </li>
+        </ul>
+    </div>
+    
+
+</body>
+
+</html>

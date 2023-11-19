@@ -12,12 +12,12 @@
             <a class="botones_barra" href="http://localhost:8080/pisos/anadirPiso">Añadir Piso</a>
             <a class="botones_barra" href="http://localhost:8080/tarifas/anadirTarifa">Añadir Tarifa</a>
             <a class="botones_barra" href="http://localhost:8080/tiposvehiculo/anadirTipo">Añadir Tipo Vehiculo</a>
-            <a class="botones_barra" href="http://localhost:8080/tarifas/tarifas-espacios">Tarifas y Espacios</a>
-            <a class="botones_barra" href="iniciar sesioon.html">Cerrar sesión</a>
+            <a class="botones_barra" [routerLink]="['/tarifa/tarifas-espacios']">Tarifas y Espacios</a>
+            <a class="botones_barra" *ngIf="showLogoutButton()" (click)="logout()">Logout</a>
         </div>
 
-      <h3>Admitir un vehículo e indicarle el piso en el cual debe parquear</h3>
-      <form (ngSubmit)="onSubmit()">
+        <h3>Admitir un vehículo e indicarle el piso en el cual debe parquear</h3>
+        <form (ngSubmit)="onSubmit()">
         <div>
             <label for="tipoVehiculo">Tipo de Vehículo:</label>
             <select id="tipoVehiculo" name="tipoVehiculo" [(ngModel)]="vehiculo.tipoVehiculo" required (ngModelChange)="verificarFormulario()">
@@ -57,7 +57,7 @@
 
         <br>
         <div>
-            <button type="submit" [disabled]="!formularioValido">Añadir vehículo</button>
+            <button id = "btnIngresar" type="submit" [disabled]="!formularioValido">Añadir vehículo</button>
         </div>
     </form>
 

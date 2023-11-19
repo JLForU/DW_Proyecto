@@ -1,8 +1,11 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { Piso } from 'src/app/model/piso';
 import { Tarifa } from 'src/app/model/tarifa';
 import { Vehiculo } from 'src/app/model/vehiculo';
+import { AuthService } from 'src/app/shared/auth.service';
 import { PisoService } from 'src/app/shared/piso.service';
 import { TarifaService } from 'src/app/shared/tarifa-service.service';
 import { VehiculoService } from 'src/app/shared/vehiculo.service';
@@ -24,10 +27,18 @@ export class RegisSalidaComponent {
   // Agrega estas variables al componente
   mensajeRetiro: string = ''; // Mensaje que se mostrará
   vehiculoRetirado: boolean = false; // Indica si el vehículo fue retirado
-  constructor(private tarifaService : TarifaService , private vehiculoIns : VehiculoService, private pisoService : PisoService){}
-
-
+  constructor(private auth: AuthService, private router: Router, private tarifaService : TarifaService , private vehiculoIns : VehiculoService, private pisoService : PisoService){}
   
+  
+  logout() {
+    this.auth.logout();
+    this.router.navigate(["/login"]);
+  }
+
+  showLogoutButton() {
+    return this.auth.isAuthenticated();
+  }
+
   onSubmit(formData: any) {
     // Busca un vehículo en la lista de vehículos basado en la placa
     this.vehiculoSeleccionado = this.vehiculos.find(
@@ -108,12 +119,8 @@ export class RegisSalidaComponent {
       console.log("Llegada1:", llegada);
       console.log("Salida1:", salida);  
       if (!isNaN(llegada.getTime()) && !isNaN(salida.getTime())) {
-        console.log("Llegada:", llegada);
-        console.log("Salida:", salida);
-        console.log("Tarifa por minuto:", tarifaMinuto);
   
         const minutosTranscurridos = (salida.getTime() - llegada.getTime()) / 60000; // 1 minuto = 60000 ms
-        console.log("Minutos transcurridos: ", minutosTranscurridos);
         this.cobroFinal = minutosTranscurridos * tarifaMinuto;
         console.log("Cobro final es: " + this.cobroFinal.toFixed(2)); // Muestra el cobro final con dos decimales
       } else {
@@ -133,11 +140,16 @@ export class RegisSalidaComponent {
     const pisoId = this.vehiculoSeleccionado.piso?.id;
     const vehiculoId = this.vehiculoSeleccionado.id;
   
-    if (pisoId === undefined || vehiculoId === undefined) {
-      console.error('No se pudo obtener el ID del piso del vehículo.');
+    if (pisoId === undefined) {
+      console.error('No se pudo obtener el ID del piso del piso.');
       return;
     }
   
+    if (vehiculoId === undefined) {
+      console.error('No se pudo obtener el ID del piso del vehiculo.');
+      return;
+    }
+
     // Llama al método salirVehiculoPiso y sacarVehiculo del servicio PisoService
     this.pisoService.salirVehiculo(pisoId).subscribe(
       (response) => {

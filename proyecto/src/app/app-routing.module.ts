@@ -5,11 +5,13 @@ import { AdmisionComponent } from './vehiculo/admision/admision.component';
 import { RegisSalidaComponent } from './vehiculo/regis-salida/regis-salida.component';
 import { LoginComponent } from './security/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
+import { TarifasEspaciosComponent } from './tarifa/tarifas-espacios/tarifas-espacios.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'vehiculo/anadirVehiculo', component: AdmisionComponent, canActivate: [AuthGuard] },    
   { path: 'vehiculo/registrarSalida', component: RegisSalidaComponent, canActivate: [AuthGuard] },
+  { path: 'tarifa/tarifas-espacios', component: TarifasEspaciosComponent, canActivate: [AuthGuard] },
   { path: '', pathMatch: 'full', redirectTo: 'login' }
 ];
 

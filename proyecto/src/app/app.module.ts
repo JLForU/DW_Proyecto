@@ -9,13 +9,15 @@ import { AdmisionComponent } from './vehiculo/admision/admision.component';
 import { RegisSalidaComponent } from './vehiculo/regis-salida/regis-salida.component';
 import { LoginComponent } from './security/login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { TarifasEspaciosComponent } from './tarifa/tarifas-espacios/tarifas-espacios.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AdmisionComponent,
     RegisSalidaComponent,
-    LoginComponent
+    LoginComponent,
+    TarifasEspaciosComponent
   ],
   imports: [
     BrowserModule,
