@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Tarifa</title>
+    <link rel="stylesheet" type="text/css" href="/style-crearTarifa.css">
+</head>
+<body>
+    <div class="barra">
+        <i>Tarifas</i>
+        <a class="botones_barra" href="/vehiculo/anadirVehiculo">Registrar Vehiculo</a>
+        <a class="botones_barra" href="/vehiculo/registrarSalida">Registrar Salida</a>
+        <a class="botones_barra" routerLink="/pisos/anadirPiso">Añadir Piso</a>
+        <a class="botones_barra" routerLink="/tiposvehiculo/anadirTipo">Tipo Vehiculo</a>
+        <a class="botones_barra" routerLink="/tarifas/tarifas-espacios">Tarifas y Espacios</a>
+        <a class="botones_barra" href="iniciar sesioon.html">Cerrar sesión</a>
+    </div>
+    <h1>Ingresar Información de Tarifa</h1>
+    <form (ngSubmit)="crearTarifa(tipoVehiculo.value, +tarifaPorMinuto.value)">
+        <label for="tipoVehiculo">Tipo de Vehículo:</label>
+        <input type="text" id="tipoVehiculo" name="tipoVehiculo" required #tipoVehiculo><br>
+    
+        <label for="tarifaPorMinuto">Tarifa por Minuto:</label>
+        <input type="number" id="tarifaPorMinuto" name="tarifaPorMinuto" step="0.01" required #tarifaPorMinuto><br>
+    
+        <div id="mensaje">
+            <p *ngIf="mensaje" class="error-message">{{ mensaje }}</p>
+        </div>
+    
+        <input type="submit" value="Crear Tarifa" class="botoon">
+    </form>
+    
+    
+    
+</body>
+</html>

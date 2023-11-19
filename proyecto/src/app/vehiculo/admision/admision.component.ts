@@ -157,10 +157,10 @@ export class AdmisionComponent implements OnInit{
 
   obtenerTarifa(tipoVehiculo: string): number {
     // Suponiendo que tarifas es una lista de objetos Tarifa
-    const tarifaEncontrada = this.tarifas.find((tarifa) => tarifa.tipoVehiculo.tipo === tipoVehiculo);
+    const tarifaEncontrada = this.tarifas.find((tarifa) => tarifa.tipoVehiculo!.tipo === tipoVehiculo);
     
     if (tarifaEncontrada) {
-      this.tarifa_id = tarifaEncontrada.id;
+      this.tarifa_id = tarifaEncontrada.id!;
       return Number(tarifaEncontrada.tarifaPorMinuto);      } 
     else {
       this.tarifa_id = null;

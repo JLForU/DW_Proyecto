@@ -10,7 +10,7 @@
             <a class="botones_barra" [routerLink]="['/vehiculo/anadirVehiculo']">Registrar Vehiculo</a> <!--Para que me envie a otro componente-->
             <a class="botones_barra" [routerLink]="['/vehiculo/registrarSalida']">Registrar Salida</a> <!--Para que me envie a otro componente-->
             <a class="botones_barra" [routerLink]="['/piso/anadirPiso']">Añadir Piso</a>
-            <a class="botones_barra" href="http://localhost:8080/tarifas/anadirTarifa">Añadir Tarifa</a>
+            <a class="botones_barra" [routerLink]="['/tarifa/anadirTarifa']">Añadir Tarifa</a>
             <a class="botones_barra" href="http://localhost:8080/tiposvehiculo/anadirTipo">Tipo Vehiculo</a>
             <a class="botones_barra" [routerLink]="['/tarifa/tarifas-espacios']">Tarifas y Espacios</a>
             <a class="botones_barra" *ngIf="showLogoutButton()" (click)="logout()">Logout</a>

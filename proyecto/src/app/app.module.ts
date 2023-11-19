@@ -14,6 +14,7 @@ import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { AnadirPisoComponent } from './piso/anadir-piso/anadir-piso.component';
 import { EliminarPisoComponent } from './piso/eliminar-piso/eliminar-piso.component';
 import { ActualizarPisoComponent } from './piso/actualizar-piso/actualizar-piso.component';
+import { AnadirTarifaComponent } from './tarifa/anadir-tarifa/anadir-tarifa.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ActualizarPisoComponent } from './piso/actualizar-piso/actualizar-piso.
     AccessDeniedComponent,
     AnadirPisoComponent,
     EliminarPisoComponent,
-    ActualizarPisoComponent
+    ActualizarPisoComponent,
+    AnadirTarifaComponent
   ],
   imports: [
     BrowserModule,
