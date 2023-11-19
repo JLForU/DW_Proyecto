@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Aplicación AdminParking</title>
+  <link rel="stylesheet" type="text/css" href="/stylepisos.css">
+</head>
+<body>
+
+  <div class="barra">
+    <i>Actualizar Pisos</i>
+    <a class="botones_barra" routerLink="/vehiculo/anadirVehiculo">Registrar Vehiculo</a>
+    <a class="botones_barra" routerLink="/vehiculo/registrarSalida">Registrar Salida</a>
+    <a class="botones_barra" [routerLink]="['/tarifa/anadirTarifa']">Añadir Tarifa</a>
+    <a class="botones_barra" [routerLink]="['/tiposvehiculo/anadirTipo']">Tipo Vehiculo</a>
+    <a class="botones_barra" [routerLink]="['/tarifas/tarifas-espacios']">Tarifas y Espacios</a>
+    <a class="botones_barra" *ngIf="showLogoutButton()" (click)="logout()">Logout</a>
+  </div>
+
+  <h4>CRUD pisos</h4>
+  
+  <div class="barraCRUD">
+    <a class="botones_barra" [routerLink]="['/piso/anadirPiso']">Añadir Piso</a>
+    <a class="botones_barra" [routerLink]="['/piso/eliminarPiso']">Eliminar Piso</a>
+  </div>
+
+  <h4>Ingrese la información para actualizar el piso</h4>
+
+  <div>
+    <!-- Mensaje de éxito -->
+    <p *ngIf="exito">{{exito}}</p>
+    <!-- Mensaje de error -->
+    <p *ngIf="error">{{error}}</p>
+  </div>
+
+  <form (ngSubmit)="actualizarPiso(+id.value, +area.value, tipoVehiculo.value, +areaPorVehiculo.value)">
+    <label for="id">Id de piso (solo números):</label>
+    <input type="number" #id id="id" name="id" pattern="[0-9]+" title="Por favor, ingrese un valor numérico" required><br>
+    <label for="area">Área del piso (solo números):</label>
+    <input type="number" #area id="area" name="area" pattern="[0-9]+" title="Por favor, ingrese un valor numérico" required><br>
+    <!-- Menú desplegable para tipo de vehículo -->
+    <label for="tipoVehiculo">Tipo de Vehículo:</label>
+    <input type="text" #tipoVehiculo id="tipoVehiculo" name="tipoVehiculo" required>
+    <label for="area">Área del vehículo (solo números):</label>
+    <input type="number" #areaPorVehiculo id="areaPorVehiculo" name="areaPorVehiculo" step="0.01" required ><br>
+    <br>
+    <button type="submit" class="botoon">Actualizar Piso</button>
+</form>
+
+
+</body>
+</html>

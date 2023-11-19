@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" name="robots" http-equiv="cache-control" content="no-store">
+    <title>Aplicación AdminParking</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/stylepisos.css}">
+</head>
+<body>
+    <body>
+
+        <div class="barra">
+            <i>Pisos</i>
+            <a class="botones_barra" [routerLink]="['/vehiculo/registrarSalida']">Registrar Salida</a>
+            <a class="botones_barra" [routerLink]="['/tarifa/anadirTarifa']">Añadir Tarifa</a>
+            <a class="botones_barra" href="http://localhost:8080/tiposvehiculo/anadirTipo">Añadir Tipo Vehiculo</a>
+            <a class="botones_barra" [routerLink]="['/tarifa/tarifas-espacios']">Tarifas y Espacios</a>
+            <a class="botones_barra" *ngIf="showLogoutButton()" (click)="logout()">Logout</a>
+        </div>
+    
+        <h4>CRUD pisos</h4>
+    
+        <div class="barraCRUD">
+            <a class="botones_barra" [routerLink]="['/piso/actualizarPiso']">Actualizar Piso</a>
+            <a class="botones_barra" [routerLink]="['/piso/eliminarPiso']">Eliminar Piso</a>
+        </div>
+    
+        <h4>Ingrese la información del piso</h4>
+    
+        <form (ngSubmit)="createPiso(area.value, tipoVehiculo.value, areaPorVehiculo.value)">
+            <label for="area">Área del piso (solo números):</label>
+            <input type="number" #area id="area" required><br>
+            
+            <label for="tipoVehiculo">Tipo de Vehículo:</label>
+            <input type="text" #tipoVehiculo id="tipoVehiculo" required><br>
+            
+            <label for="areaPorVehiculo">Área del vehículo (solo números):</label>
+            <input type="number" #areaPorVehiculo id="areaPorVehiculo" step="0.01" required><br>
+            
+            <br>
+            <input type="submit" value="Crear Piso" class="botoon">
+        </form>
+        
+    
+        <div>
+            <!-- Mensaje de éxito -->
+            <p *ngIf="exito">{{exito}}</p>
+            <!-- Mensaje de error -->
+            <p *ngIf="error">{{error}}</p>
+        </div>
+        
+    </body>

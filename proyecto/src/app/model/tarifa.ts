@@ -1,15 +1,16 @@
-/* IMPLEMENTACIÓN DE CLASE "Tarifa". */
-
 import { TipoVehiculo } from "./tipo-vehiculo";
 
 export class Tarifa {
+    id: number | undefined;
+    tipoVehiculo: TipoVehiculo | undefined;
+    tarifaPorMinuto: string;
 
+    constructor(tipoVehiculo: TipoVehiculo, tarifaPorMinuto: string) {
+        this.tipoVehiculo = tipoVehiculo;
+        this.tarifaPorMinuto = tarifaPorMinuto;
+    }
 
-    constructor (
-        public id : number ,
-        public tipoVehiculo : TipoVehiculo ,
-        public tarifaPorMinuto : string
-    ) { }
-
-
+    setId(id: number): void {
+        this.id = id;
+    }
 }

@@ -198,10 +198,10 @@ export class RegisSalidaComponent {
   }
   getPisoIdPorPlaca(placa: string): number | null {
     for (const piso of this.pisos) {
-      if (piso.tipoVehiculo.tipo === this.vehiculoSeleccionado!.tipoVehiculo!.tipo && piso.vehiculos) {
+      if (piso.tipoVehiculo!.tipo === this.vehiculoSeleccionado!.tipoVehiculo!.tipo && piso.vehiculos) {
         const vehiculoEnPiso = piso.vehiculos.find((vehiculo) => vehiculo.placa === placa);
         if (vehiculoEnPiso) {
-          return piso.id;
+          return piso.id!;
         }
       }
     }
@@ -210,9 +210,9 @@ export class RegisSalidaComponent {
   
   obtenerTarifa(tipoVehiculo: string): number {
     // Suponiendo que tarifas es una lista de objetos Tarifa
-    const tarifaEncontrada = this.tarifas.find((tarifa) => tarifa.tipoVehiculo.tipo === tipoVehiculo);
+    const tarifaEncontrada = this.tarifas.find((tarifa) => tarifa.tipoVehiculo!.tipo === tipoVehiculo);
     if (tarifaEncontrada) {
-      this.tarifa_id = tarifaEncontrada.id;
+      this.tarifa_id = tarifaEncontrada.id!;
       return Number(tarifaEncontrada.tarifaPorMinuto);      } 
     else {
       this.tarifa_id = null;

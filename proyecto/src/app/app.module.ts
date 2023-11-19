@@ -11,6 +11,10 @@ import { LoginComponent } from './security/login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { TarifasEspaciosComponent } from './tarifa/tarifas-espacios/tarifas-espacios.component';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
+import { AnadirPisoComponent } from './piso/anadir-piso/anadir-piso.component';
+import { EliminarPisoComponent } from './piso/eliminar-piso/eliminar-piso.component';
+import { ActualizarPisoComponent } from './piso/actualizar-piso/actualizar-piso.component';
+import { AnadirTarifaComponent } from './tarifa/anadir-tarifa/anadir-tarifa.component';
 import { EliminarTipoComponent } from './tipoVehiculo/eliminar-tipo/eliminar-tipo.component';
 import { AnadirTipoComponent } from './tipoVehiculo/anadir-tipo/anadir-tipo.component';
 
@@ -23,7 +27,11 @@ import { AnadirTipoComponent } from './tipoVehiculo/anadir-tipo/anadir-tipo.comp
     TarifasEspaciosComponent,
     AccessDeniedComponent,
     AnadirTipoComponent,
-    EliminarTipoComponent
+    EliminarTipoComponent,
+    AnadirPisoComponent,
+    EliminarPisoComponent,
+    ActualizarPisoComponent,
+    AnadirTarifaComponent
   ],
   imports: [
     BrowserModule,

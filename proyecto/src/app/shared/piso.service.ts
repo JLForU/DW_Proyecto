@@ -43,4 +43,32 @@ export class PisoService {
     
   }
 
+  createPiso(piso : Piso){
+    return this.http.post("http://localhost:8080/pisosRest/createPiso",piso,{
+      headers : new HttpHeaders({
+        'Content-Type': 'application/json;charset=UTF-8'
+      })
+    });
+    
+  }
+
+  actuPiso(piso : Piso){
+    return this.http.post("http://localhost:8080/pisosRest/actu",piso,{
+      headers : new HttpHeaders({
+        'Content-Type': 'application/json;charset=UTF-8'
+      })
+    });
+    
+  }
+
+  deletePiso(piso : Piso){
+    console.log(piso);
+    return this.http.post("http://localhost:8080/pisosRest/delete",piso,{
+      headers : new HttpHeaders({
+        'Content-Type': 'application/json;charset=UTF-8'
+      })
+    });
+    
+  }
+
 }

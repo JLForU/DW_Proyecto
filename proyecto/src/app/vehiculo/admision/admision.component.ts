@@ -39,8 +39,7 @@ export class AdmisionComponent implements OnInit{
     return this.auth.isAuthenticated();
   }
   ngOnInit(): void {
-    const userRole = this.auth.role(); // Obtener el rol del usuario autenticado
-  
+    const userRole = this.auth.role(); 
     if (userRole) {
       const isAdminOrPortero = userRole === 'ADMIN' || userRole === 'PORTERO';
       if (isAdminOrPortero) {
@@ -60,8 +59,6 @@ export class AdmisionComponent implements OnInit{
           error: err => {
             if (err.status === 403) {
               this.router.navigate(['/access-denied']); // Redirige a la página de acceso denegado
-            } else {
-              // Manejo de otros errores
             }
           }
         });
@@ -107,7 +104,7 @@ export class AdmisionComponent implements OnInit{
           this.pisoService.getPisoById(this.id_piso).subscribe((piso) => {
             if (piso) {
               // Verificar que el tipo de vehículo del piso coincide con el del vehículo
-              if (piso.tipoVehiculo.tipo === vehiculo1.tipoVehiculo?.tipo) {
+              if (piso.tipoVehiculo!.tipo === vehiculo1.tipoVehiculo?.tipo) {
                 // Verificar si hay espacios disponibles en el piso
                 if (piso.capacidad > 0) {
                   // Obtener la tarifa por el tipo de vehículo
@@ -118,7 +115,7 @@ export class AdmisionComponent implements OnInit{
                       // Asignar la tarifa al vehículo
                       vehiculo1.tarifa = tarifa;
                       // Llamar al servicio para actualizar los espacios en el piso
-                      this.pisoService.updateEspacios(piso.id).subscribe(() => {
+                      this.pisoService.updateEspacios(piso.id!).subscribe(() => {
                         // Llamar al servicio para crear el vehículo
                         this.vehiculoIns.createVehiculo(vehiculo1).subscribe((vehiculoCreado) => {
                           if (vehiculoCreado) {
@@ -159,10 +156,10 @@ export class AdmisionComponent implements OnInit{
 
   obtenerTarifa(tipoVehiculo: string): number {
     // Suponiendo que tarifas es una lista de objetos Tarifa
-    const tarifaEncontrada = this.tarifas.find((tarifa) => tarifa.tipoVehiculo.tipo === tipoVehiculo);
+    const tarifaEncontrada = this.tarifas.find((tarifa) => tarifa.tipoVehiculo!.tipo === tipoVehiculo);
     
     if (tarifaEncontrada) {
-      this.tarifa_id = tarifaEncontrada.id;
+      this.tarifa_id = tarifaEncontrada.id!;
       return Number(tarifaEncontrada.tarifaPorMinuto);      } 
     else {
       this.tarifa_id = null;
@@ -184,7 +181,7 @@ export class AdmisionComponent implements OnInit{
   getPisosPorTipoVehiculo(tipoVehiculo: string): any[] {
     const pisosEncontrados: any[] = [];
     for (const piso of this.pisos) {
-      if (piso.tipoVehiculo.tipo === tipoVehiculo) { 
+      if (piso.tipoVehiculo!.tipo === tipoVehiculo) { 
         pisosEncontrados.push({
           id: piso.id,
           capacidad: piso.capacidad,
