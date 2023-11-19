@@ -1,0 +1,34 @@
+<!-- HTML adaptado para Angular -->
+<div class="barra">
+    <i> Eliminar Tipo Vehiculo</i>
+    <a class="botones_barra" [routerLink]="['/vehiculo/registrarSalida']">Registrar Salida</a> <!--Para que me envie a otro componente-->
+    <a class="botones_barra" href="http://localhost:8080/pisos/anadirPiso">Añadir Piso</a>
+    <a class="botones_barra" href="http://localhost:8080/tarifas/anadirTarifa">Añadir Tarifa</a>
+    <a class="botones_barra" [routerLink]="['/tarifa/tarifas-espacios']">Tarifas y Espacios</a>
+    <a class="botones_barra" *ngIf="showLogoutButton()" (click)="logout()">Logout</a>
+  </div>
+  <h4>CRUD tipos Vehiculo</h4>
+  
+  <div class="barraCRUD">
+    <a class="botones_barra" [routerLink]="['/tipoVehiculo/anadir-tipo']">Añadir Tipo Vehiculo</a>
+  </div>
+  <h4>Ingrese la información del tipo</h4>
+  <!-- Formulario para eliminar tipo -->
+  <form (ngSubmit)="eliminarTipoDeVehiculo()">
+    <select name="tipo" id="tipo" [(ngModel)]="vehiculo.id" required>
+      <option value="">Seleccione un tipo de vehículo</option>
+      <!-- Utiliza *ngFor para recorrer la lista de tipos -->
+      <option *ngFor="let tipo of tipos" [value]="tipo.id">{{ tipo.tipo }}</option>
+    </select>
+    <br>
+    <br>
+    <input type="submit" value="Eliminar Tipo" class="botoon">
+  </form>
+  
+ <!-- Mensaje de éxito/error -->
+<div>
+  <p *ngIf="successMessage" class="mensaje-exito">{{ successMessage }}</p>
+  <p *ngIf="errorMessage" class="mensaje-error">{{ errorMessage }}</p>
+</div>
+
+  

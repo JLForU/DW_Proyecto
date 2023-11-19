@@ -11,6 +11,8 @@ import { LoginComponent } from './security/login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { TarifasEspaciosComponent } from './tarifa/tarifas-espacios/tarifas-espacios.component';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
+import { EliminarTipoComponent } from './tipoVehiculo/eliminar-tipo/eliminar-tipo.component';
+import { AnadirTipoComponent } from './tipoVehiculo/anadir-tipo/anadir-tipo.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { AccessDeniedComponent } from './access-denied/access-denied.component';
     RegisSalidaComponent,
     LoginComponent,
     TarifasEspaciosComponent,
-    AccessDeniedComponent
+    AccessDeniedComponent,
+    AnadirTipoComponent,
+    EliminarTipoComponent
   ],
   imports: [
     BrowserModule,

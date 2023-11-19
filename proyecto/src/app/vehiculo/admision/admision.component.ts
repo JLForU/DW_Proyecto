@@ -43,7 +43,6 @@ export class AdmisionComponent implements OnInit{
   
     if (userRole) {
       const isAdminOrPortero = userRole === 'ADMIN' || userRole === 'PORTERO';
-  
       if (isAdminOrPortero) {
         forkJoin([
           this.tarifaService.getTarifas(),

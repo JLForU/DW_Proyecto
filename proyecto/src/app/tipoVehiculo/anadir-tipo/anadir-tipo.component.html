@@ -1,0 +1,31 @@
+<!-- Reemplaza las rutas de los estilos y las imágenes según la estructura de tu proyecto -->
+<link rel="stylesheet" type="text/css" href="/path/to/stylepisos.css">
+
+<div class="barra">
+    <i>Anadir Tipo Vehiculo</i>
+    <a class="botones_barra" [routerLink]="['/vehiculo/registrarSalida']">Registrar Salida</a> <!--Para que me envie a otro componente-->
+    <a class="botones_barra" href="http://localhost:8080/pisos/anadirPiso">Añadir Piso</a>
+    <a class="botones_barra" href="http://localhost:8080/tarifas/anadirTarifa">Añadir Tarifa</a>
+    <a class="botones_barra" [routerLink]="['/tarifa/tarifas-espacios']">Tarifas y Espacios</a>
+    <a class="botones_barra" *ngIf="showLogoutButton()" (click)="logout()">Logout</a>
+</div>
+
+<h4>CRUD Tipos</h4>
+
+<div class="barraCRUD">
+    <a class="botones_barra" [routerLink]="['/tipoVehiculo/eliminar-tipo']">Eliminar tipo vehiculo</a>
+</div> 
+
+<h4>Ingresar Información del Nuevo Tipo de Vehiculo</h4>
+
+<form (ngSubmit)="crearTipoVehiculo()" #tipoForm="ngForm">
+    <label for="tipoVehiculo"> Nuevo Tipo de Vehículo:</label>
+    <input type="text" id="tipoVehiculo" name="tipoVehiculo" required [(ngModel)]="vehiculo.tipo"><br>
+  
+    <div id="mensaje">
+      <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+    </div>
+    <br>
+    <button type="submit" class="botoon">Crear Tipo de Vehiculo</button>
+  </form>
+  

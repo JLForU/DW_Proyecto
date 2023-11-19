@@ -14,7 +14,7 @@
         <a class="botones_barra" [routerLink]="['/vehiculo/registrarSalida']">Registrar Salida</a> <!--Para que me envie a otro componente-->
         <a class="botones_barra" href="http://localhost:8080/pisos/anadirPiso">Añadir Piso</a>
         <a class="botones_barra" href="http://localhost:8080/tarifas/anadirTarifa">Añadir Tarifa</a>
-        <a class="botones_barra" href="http://localhost:8080/tiposvehiculo/anadirTipo">Añadir Tipo Vehiculo</a>
+        <a class="botones_barra" [routerLink]="['/tipoVehiculo/anadir-tipo']">Añadir Tipo Vehiculo</a>
         <a class="botones_barra" *ngIf="showLogoutButton()" (click)="logout()">Logout</a>
     </div>
 
