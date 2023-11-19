@@ -1,18 +1,32 @@
-
 import { TipoVehiculo } from './tipo-vehiculo';
 import { Vehiculo } from './vehiculo';
 
-
-/* IMPLEMENTACIÓN DE CLASE "Piso". */
-
 export class Piso {
+    id: number | undefined;
+    area: string;
+    tipoVehiculo: TipoVehiculo | undefined;
+    capacidad: number;
+    vehiculos: Vehiculo[] | undefined;
 
-    constructor (
-        public id : number ,
-        public area : string ,
-        public tipoVehiculo : TipoVehiculo ,
-        public capacidad : number,
-        public vehiculos : Vehiculo[]
-    ) { }
+    constructor(area: string, tipoVehiculo: TipoVehiculo, capacidad: number) {
+        this.area = area;
+        this.tipoVehiculo = tipoVehiculo;
+        this.capacidad = capacidad;
+    }
 
+    setTipoVehiculo(tipo: TipoVehiculo): void {
+        this.tipoVehiculo = tipo;
+    }
+
+    addVehiculo(vehiculo: Vehiculo): void {
+        if (!this.vehiculos) {
+            this.vehiculos = [];
+        }
+        this.vehiculos.push(vehiculo);
+    }
+
+    setId(id: number): void {
+        this.id = id;
+    }
+    
 }

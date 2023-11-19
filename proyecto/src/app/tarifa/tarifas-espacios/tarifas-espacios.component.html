@@ -11,8 +11,9 @@
 <body>
     <div class="barra">
         <i>Tarifas y Espacios</i>
+        <a class="botones_barra" [routerLink]="['/vehiculo/anadirVehiculo']">Registrar Vehiculo</a> <!--Para que me envie a otro componente-->
         <a class="botones_barra" [routerLink]="['/vehiculo/registrarSalida']">Registrar Salida</a> <!--Para que me envie a otro componente-->
-        <a class="botones_barra" href="http://localhost:8080/pisos/anadirPiso">Añadir Piso</a>
+        <a class="botones_barra" [routerLink]="['/piso/anadirPiso']">Añadir Piso</a>
         <a class="botones_barra" href="http://localhost:8080/tarifas/anadirTarifa">Añadir Tarifa</a>
         <a class="botones_barra" href="http://localhost:8080/tiposvehiculo/anadirTipo">Añadir Tipo Vehiculo</a>
         <a class="botones_barra" *ngIf="showLogoutButton()" (click)="logout()">Logout</a>
@@ -42,7 +43,7 @@
         <h4>Espacios disponibles por tipo de vehículo:</h4>
         <ul>
             <li *ngFor="let infoPiso of pisos" class="pisos">
-                {{ infoPiso.tipoVehiculo.tipo }}: {{ infoPiso.capacidad  }} espacios disponibles
+                {{ infoPiso.tipoVehiculo!.tipo }}: {{ infoPiso.capacidad  }} espacios disponibles
             </li>
         </ul>
     </div>

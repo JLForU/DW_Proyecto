@@ -198,10 +198,10 @@ export class RegisSalidaComponent {
   }
   getPisoIdPorPlaca(placa: string): number | null {
     for (const piso of this.pisos) {
-      if (piso.tipoVehiculo.tipo === this.vehiculoSeleccionado!.tipoVehiculo!.tipo && piso.vehiculos) {
+      if (piso.tipoVehiculo!.tipo === this.vehiculoSeleccionado!.tipoVehiculo!.tipo && piso.vehiculos) {
         const vehiculoEnPiso = piso.vehiculos.find((vehiculo) => vehiculo.placa === placa);
         if (vehiculoEnPiso) {
-          return piso.id;
+          return piso.id!;
         }
       }
     }
