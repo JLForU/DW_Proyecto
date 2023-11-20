@@ -11,9 +11,9 @@
         <a class="botones_barra" href="/vehiculo/anadirVehiculo">Registrar Vehiculo</a>
         <a class="botones_barra" href="/vehiculo/registrarSalida">Registrar Salida</a>
         <a class="botones_barra" routerLink="/pisos/anadirPiso">Añadir Piso</a>
-        <a class="botones_barra" routerLink="/tiposvehiculo/anadirTipo">Tipo Vehiculo</a>
+        <a class="botones_barra" [routerLink]="['/tipoVehiculo/anadir-tipo']">Añadir Tipo Vehiculo</a>
         <a class="botones_barra" routerLink="/tarifas/tarifas-espacios">Tarifas y Espacios</a>
-        <a class="botones_barra" href="iniciar sesioon.html">Cerrar sesión</a>
+        <a class="botones_barra" *ngIf="showLogoutButton()" (click)="logout()">Logout</a>
     </div>
     <h1>Ingresar Información de Tarifa</h1>
     <form (ngSubmit)="crearTarifa(tipoVehiculo.value, +tarifaPorMinuto.value)">
