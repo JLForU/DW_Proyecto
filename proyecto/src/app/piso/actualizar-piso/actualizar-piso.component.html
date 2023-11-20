@@ -9,8 +9,8 @@
 
   <div class="barra">
     <i>Actualizar Pisos</i>
-    <a class="botones_barra" routerLink="/vehiculo/anadirVehiculo">Registrar Vehiculo</a>
-    <a class="botones_barra" routerLink="/vehiculo/registrarSalida">Registrar Salida</a>
+    <a class="botones_barra" [routerLink]="['/vehiculo/anadirVehiculo']">Registrar Vehiculo</a> <!--Para que me envie a otro componente-->
+    <a class="botones_barra" [routerLink]="['/vehiculo/registrarSalida']">Registrar Salida</a>
     <a class="botones_barra" [routerLink]="['/tarifa/anadirTarifa']">Añadir Tarifa</a>
     <a class="botones_barra" [routerLink]="['/tiposvehiculo/anadirTipo']">Tipo Vehiculo</a>
     <a class="botones_barra" [routerLink]="['/tarifas/tarifas-espacios']">Tarifas y Espacios</a>
