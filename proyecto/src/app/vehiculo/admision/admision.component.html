@@ -43,9 +43,7 @@
             <label for="idPiso" style="display: inline-block; width: 200px;">Indique el piso:</label>
             <select id="idPiso" name="idPiso" [(ngModel)]="id_piso" required (ngModelChange)="verificarFormulario()">
                 <option value="">Seleccione un piso</option>
-                <option *ngFor="let piso of getPisosPorTipoVehiculo(vehiculo.tipoVehiculo)" [value]="piso.id">
-                    ID del piso: {{ piso.id }} - Espacios disponibles: {{ piso.capacidad }}
-                </option>
+                <option *ngFor="let piso of getPisosPorTipoVehiculo(vehiculo.tipoVehiculo)" [value]="piso.id">ID del piso: {{ piso.id }} - Espacios disponibles: {{ piso.capacidad }}</option>
             </select>
         </div>
 
@@ -62,9 +60,9 @@
 
     
     <div id="aviso"></div>
-    <div class="error-message" *ngIf="errorMessages.length > 0">
+    <div  class="error-message" *ngIf="errorMessages.length > 0">
         <ul>
-            <li *ngFor="let errorMessage of errorMessages">{{ errorMessage }}</li>
+            <li id = "mensaje" *ngFor="let errorMessage of errorMessages">{{ errorMessage }}</li>
         </ul>
     </div>
         
